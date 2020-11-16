@@ -18,10 +18,15 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    swaggerVersion = '3.0.0'
+}
+
 dependencies {
     //Spring Boot
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     //Database
     implementation 'org.liquibase:liquibase-core'
@@ -30,6 +35,9 @@ dependencies {
     //Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    //Swagger
+    implementation "io.springfox:springfox-boot-starter:${swaggerVersion}"
 
     //Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
