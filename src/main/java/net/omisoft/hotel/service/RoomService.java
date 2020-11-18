@@ -40,7 +40,6 @@ public class RoomService {
 
         return roomRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException(message.getMessage("exception.room.not_exists", new Object[]{id})));
-
     }
 
     @Transactional(readOnly = true)
