@@ -3,6 +3,11 @@ package net.omisoft.hotel.mapper;
 import net.omisoft.hotel.dto.reservation.ReservationCreateDto;
 import net.omisoft.hotel.dto.reservation.ReservationDto;
 import net.omisoft.hotel.model.Reservation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class ReservationMapper {
 
@@ -24,6 +29,24 @@ public final class ReservationMapper {
                 .endDate(reservation.getEndDate())
                 .room(RoomMapper.toDto(reservation.getRoom()))
                 .build();
+    }
+
+    public static List<ReservationDto> toDto(List<Reservation> reservations) {
+        if (reservations == null) {
+            return null;
+        }
+        List<ReservationDto> result = new ArrayList<>(reservations.size());
+        for (Reservation reservation : reservations) {
+            result.add(toDto(reservation));
+        }
+        return result;
+    }
+
+    public static Page<ReservationDto> toDto(Page<Reservation> reservations) {
+        if (reservations == null) {
+            return null;
+        }
+        return new PageImpl<>(toDto(reservations.getContent()), reservations.getPageable(), reservations.getTotalElements());
     }
 
 }

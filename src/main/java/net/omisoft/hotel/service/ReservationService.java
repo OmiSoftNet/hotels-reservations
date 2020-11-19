@@ -9,7 +9,10 @@ import net.omisoft.hotel.model.Reservation;
 import net.omisoft.hotel.model.Room;
 import net.omisoft.hotel.repository.ReservationRepository;
 import net.omisoft.hotel.repository.RoomRepository;
+import net.omisoft.hotel.repository.specification.ReservationDateRangeSpecification;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,6 +50,13 @@ public class ReservationService {
 
         return reservationRepository.getByIdJoinRoom(id)
                 .orElseThrow(() -> new NoSuchElementException(message.getMessage("exception.reservation.not_exists", new Object[]{id})));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Reservation> get(ReservationDateRangeSpecification specification, Pageable pageable) {
+        log.debug("Get all Reservations");
+
+        return reservationRepository.findAll(specification, pageable);
     }
 
     @Transactional

@@ -20,6 +20,7 @@ repositories {
 
 ext {
     swaggerVersion = '3.0.0'
+    specificationArgumentResolverVersion = '2.6.2'
 }
 
 dependencies {
@@ -38,6 +39,9 @@ dependencies {
 
     //Swagger
     implementation "io.springfox:springfox-boot-starter:${swaggerVersion}"
+
+    //Specification Argument Resolver
+    implementation "net.kaczmarzyk:specification-arg-resolver:${specificationArgumentResolverVersion}"
 
     //Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
